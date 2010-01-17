@@ -32,6 +32,9 @@ else
   rake "gems:install"
 end
 
+if yes?("Do you want to use jQuery? (yes/no)")
+  load_template "#{ENV["RAILS_TEMPLATES"]}/jrails.rb"  
+end
 
 
 generate :rspec
