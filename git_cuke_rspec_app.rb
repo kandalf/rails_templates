@@ -22,15 +22,23 @@ inside('config') do
   run 'echo "config.gem \'factory_girl\', :lib => false" >> environments/test.rb'
 end
 
-if yes?("Install gems as root?")
+gem "haml"
+
+if yes?("Install gems as root? (yes/no)")
   run "sudo rake gems:install RAILS_ENV=test"
+  run "sudo rake gems:install"
 else
   rake "gems:install RAILS_ENV=test"
+  rake "gems:install"
 end
-  
+
+
+
 generate :rspec
 generate :cucumber
-#run "script/generate cucumber"
+
+run "script/generate nifty_layout --haml"
+
 
 git :init
 git :add => "."
